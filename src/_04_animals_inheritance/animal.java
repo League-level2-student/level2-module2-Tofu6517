@@ -1,10 +1,13 @@
 package _04_animals_inheritance;
 
-public class Dog extends animal{
-
-	Dog(String name, String furColor, boolean isGirl) {
-		super(name, furColor, isGirl);
-		// TODO Auto-generated constructor stub
+public class animal {
+	String name;
+	String furColor;
+	boolean isGirl;
+	animal(String name, String furColor, boolean isGirl) {
+		this.name=name;
+		this.furColor=furColor;
+		this.isGirl=isGirl;
 	}
 	
 	public void printName() {
