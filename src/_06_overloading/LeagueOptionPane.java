@@ -1,5 +1,6 @@
 package _06_overloading;
 
+import java.awt.Image;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -7,6 +8,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /*
  * Overloading is when we have multiple methods with the SAME name, but DIFFERENT parameters.
@@ -15,13 +17,25 @@ import javax.swing.JPanel;
  * 
  * GOAL: Create your own custom pop-up messages
  */
-public class LeagueOptionPane {
-	
+public class LeagueOptionPane{
+	static JFrame frame=new JFrame("Title");
+	static JPanel panel=new JPanel();
+	static JLabel label1=new JLabel();
+	static JLabel label2=new JLabel();
+
 	public static void showMessageDialog(String message) {
 		// 1. Open example.png and make a GUI that looks like that
 		//    The message parameter is what we want to show on our pop-up
+		frame.setSize(200,200);
+		label2.setIcon(loadImage("league.png"));
+		label1.setText(message);
+		frame.setVisible(true);
+		frame.add(panel);
+		panel.add(label2);
+		panel.add(label1);
 		
 		
+
 		// 2. Uncomment the line of code below. It sets the location of our frame to the center of the screen
 		//frame.setLocationRelativeTo(null);
 	}
@@ -31,13 +45,21 @@ public class LeagueOptionPane {
 
 	// 4. Create another showMessageDialog() method that lets us also choose the Message and Title 
 	//    2 String parameters (one for the message and one for the title)
-	
+	public static void showMessageDialog(String message,String title) {
+		label1.setText(message);
+		frame.setTitle(title);
+	}
 	// 5. Call this method in the Runner class
 	
 	
 	// 6. Create another showMessageDialog() method that lets us choose the Message, Title, and Image
 	//    3 String parameters (one for the message, one for the title, and one for the fileName)
-	
+	public static void showMessageDialog(String message,String title,String fileName) {
+		label1.setText(message);
+		frame.setTitle(title);
+		label2.setIcon(loadImage(fileName));
+		
+	}
 	// 7. Call this method in the Runner class
 	
 	// CHALLENGE: 
