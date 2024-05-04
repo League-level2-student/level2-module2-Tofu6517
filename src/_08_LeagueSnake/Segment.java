@@ -12,7 +12,7 @@ public class Segment {
     int x;
     int y;
     public void initialize() {
-    	x=0;
-    	y=0;
+    	x=200;
+    	y=200;
     }
 }
