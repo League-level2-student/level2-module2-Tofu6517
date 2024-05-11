@@ -18,6 +18,7 @@ public class LeagueSnake extends PApplet {
     int amountOfFoodEaten=0;
 	int movinX=5;
 	int movinY=5;
+	
     /*
      * Setup methods
      * 
@@ -35,8 +36,9 @@ public class LeagueSnake extends PApplet {
         head=new Segment();
         frameRate(20);
         dropFood();
+        
     }
-
+    
     void dropFood() {
         // Set the food in a new random location
     	foodX = ((int)random(50)*10);
@@ -56,6 +58,8 @@ public class LeagueSnake extends PApplet {
         move();
         drawSnake(0,0);
         eat();
+        manageTail();
+   	 	checkBoundaries();
     }
 
     void drawFood() {
@@ -69,16 +73,17 @@ public class LeagueSnake extends PApplet {
         // Draw the head of the snake followed by its tail
     	movinX=movinX+changeInDX;
     	movinY=movinY+changeInDY;
-    	head.initialize();
     	fill(250,0,0);
-    	rect(head.x+movinX,head.y+movinY,10,10);
+    	rect(movinX,movinY,10,10);
     	fill(250,0,0);
-    	 checkBoundaries();
+
     }
 
-    void drawTail() {
+    void drawTail(int minusX, int minusY) {
         // Draw each segment of the tail
-        
+    	fill(250,0,0);
+    	rect(movinX+minusX,movinY+minusY,10,10);
+    	fill(250,0,0);
     }
 
     /*
@@ -91,7 +96,13 @@ public class LeagueSnake extends PApplet {
         // After drawing the tail, add a new segment at the "start" of the tail and
         // remove the one at the "end"
         // This produces the illusion of the snake tail moving.
-
+     	checkTailCollision();
+     	if(amountOfFoodEaten>0) {
+     		System.out.println("afyabf");
+     		for(int i=amountOfFoodEaten;i<=0;i--) {
+     			drawTail(-5,-5);
+     		}
+     	}
     }
 
     void checkTailCollision() {
@@ -144,29 +155,30 @@ public class LeagueSnake extends PApplet {
 
     void checkBoundaries() {
         // If the snake leaves the frame, make it reappear on the other side
-        if(head.x>500) {
-        	head.x=0;
+        if(movinX>500) {
         	movinX=0;
+        	System.out.println("over 500x");
         }
-        else if(head.x<0) {
-        	head.x=500;
+        else if(movinX<0) {
         	movinX=500;
+        	System.out.println("over 0x");
         }
-        else if(head.y>500) {
-        	head.y=0;
+        else if(movinY>500) {
         	movinY=0;
+        	System.out.println("over 500Y");
         }
-        else if(head.y<0) {
-        	head.y=500;
+        else if(movinY<0) {
         	movinY=500;
+        	System.out.println("over 0Y");
         }
     }
 
     void eat() {
         // When the snake eats the food, its tail should grow and more
         // food appear
-        if(head.x==foodX&&head.y==foodY) {
+        if(movinX==foodX&&movinY==foodY||movinX-5==foodX&&movinY-5==foodY||movinX+5==foodX&&movinY+5==foodY) {
         	amountOfFoodEaten=amountOfFoodEaten+1;
+        	System.out.println(amountOfFoodEaten);
         	dropFood();
         }
     }
