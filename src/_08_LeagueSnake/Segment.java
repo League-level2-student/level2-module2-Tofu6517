@@ -11,8 +11,21 @@ package _08_LeagueSnake;
 public class Segment {
     int x;
     int y;
-    public void initialize() {
-    	x=200;
-    	y=200;
+    
+    
+    public Segment(int x, int y) {
+    	this.x=x;
+    	this.y=y;
+    }
+
+    @Override
+    public boolean equals(Segment obj) {
+    	
+    	if(this.x==obj.x&&this.y==obj.y) {
+    		return true;	
+    	}
+    	else {
+    		return false;
+    	}
     }
 }
